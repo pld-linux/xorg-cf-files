@@ -1,12 +1,12 @@
 Summary:	X.org cf files
 Summary(pl):	Pliki cf z X.org
 Name:		xorg-cf-files
-Version:	1.0.0
+Version:	1.0.1
 Release:	0.1
 License:	MIT
 Group:		X11/Development/Tools
-Source0:	http://xorg.freedesktop.org/releases/X11R7.0-RC4/util/%{name}-%{version}.tar.bz2
-# Source0-md5:	f2083ccfd4cb9876c8bb7f16a3017f0a
+Source0:	http://xorg.freedesktop.org/releases/X11R7.0/src/util/%{name}-X11R7.0-%{version}.tar.bz2
+# Source0-md5:	f2dd453c37386293fb207431b4a073dd
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -20,7 +20,7 @@ X.org cf files.
 Pliki cf z X.org.
 
 %prep
-%setup -q
+%setup -q -n %{name}-X11R7.0-%{version}
 
 %build
 %{__aclocal}
@@ -41,5 +41,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README
+%doc COPYING ChangeLog README
 %{_libdir}/X11/config
