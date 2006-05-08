@@ -5,7 +5,7 @@ Version:	1.0.1
 Release:	0.3
 License:	MIT
 Group:		X11/Development/Tools
-Source0:	http://xorg.freedesktop.org/releases/X11R7.0/src/util/%{name}-X11R7.0-%{version}.tar.bz2
+Source0:	http://xorg.freedesktop.org/releases/individual/util/%{name}-%{version}.tar.bz2
 # Source0-md5:	f2dd453c37386293fb207431b4a073dd
 Patch0:		%{name}-projectroot.patch
 Patch1:		%{name}-lib64.patch
