@@ -22,7 +22,7 @@ X.org cf files.
 Pliki cf z X.org.
 
 %prep
-%setup -q -n %{name}-X11R7.0-%{version}
+%setup -q -n %{name}-%{version}
 %patch0 -p1
 %if "%{_lib}" == "lib64"
 %patch1 -p1
