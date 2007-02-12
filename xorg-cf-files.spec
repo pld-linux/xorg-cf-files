@@ -1,5 +1,5 @@
 Summary:	X.org cf files
-Summary(pl.UTF-8):   Pliki cf z X.org
+Summary(pl.UTF-8):	Pliki cf z X.org
 Name:		xorg-cf-files
 Version:	1.0.2
 Release:	0.1
