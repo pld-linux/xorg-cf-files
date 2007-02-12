@@ -1,5 +1,5 @@
 Summary:	X.org cf files
-Summary(pl):	Pliki cf z X.org
+Summary(pl.UTF-8):   Pliki cf z X.org
 Name:		xorg-cf-files
 Version:	1.0.2
 Release:	0.1
@@ -18,7 +18,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 X.org cf files.
 
-%description -l pl
+%description -l pl.UTF-8
 Pliki cf z X.org.
 
 %prep
