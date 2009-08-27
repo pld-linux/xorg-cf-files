@@ -1,0 +1,10 @@
+--- xorg-cf-files-1.0.2/Makefile.am.orig	2005-12-10 17:29:39.000000000 +0100
++++ xorg-cf-files-1.0.2/Makefile.am	2009-08-27 08:51:31.000000000 +0200
+@@ -34,7 +34,6 @@
+ 	oldlib.rules \
+ 	os2.rules \
+ 	os2Lib.rules \
+-	os2Lib.rules \
+ 	osfLib.rules \
+ 	scoLib.rules \
+ 	sequentLib.rules \
