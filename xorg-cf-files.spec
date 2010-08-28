@@ -1,19 +1,17 @@
 Summary:	X.org cf files
 Summary(pl.UTF-8):	Pliki cf z X.org
 Name:		xorg-cf-files
-Version:	1.0.2
+Version:	1.0.3
 Release:	1
 License:	MIT
 Group:		X11/Development/Tools
 Source0:	http://xorg.freedesktop.org/releases/individual/util/%{name}-%{version}.tar.bz2
-# Source0-md5:	5f62dd5545b782c74f6e4e70d0e6552c
-Patch0:		%{name}-projectroot.patch
-Patch1:		%{name}-lib64.patch
-Patch2:		%{name}-Makefile.patch
+# Source0-md5:	10546b5ddda3cdda7950bb56bf98e0ea
+Patch0:		%{name}-lib64.patch
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	xorg-util-util-macros
+BuildRequires:	xorg-util-util-macros >= 1.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -24,11 +22,9 @@ Pliki cf z X.org.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p1
 %if "%{_lib}" == "lib64"
-%patch1 -p1
+%patch0 -p1
 %endif
-%patch2 -p1
 
 %build
 %{__aclocal}
