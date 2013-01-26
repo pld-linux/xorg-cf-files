@@ -1,0 +1,16 @@
+--- xorg-cf-files-1.0.4/linux.cf.orig	2009-10-16 23:45:42.000000000 +0200
++++ xorg-cf-files-1.0.4/linux.cf	2013-01-26 13:07:10.845411744 +0100
+@@ -94,11 +94,12 @@
+ XCOMM libc:	(LinuxCLibMajorVersion./**/LinuxCLibMinorVersion./**/LinuxCLibTeenyVersion)
+ XCOMM binutils:	(LinuxBinUtilsMajorVersion)
+ 
+-#if LinuxDistribution == LinuxDebian
+ # if !defined(NothingOutsideProjectRoot) || !NothingOutsideProjectRoot
+ #  define SystemManDirectory	/usr/share/man
++#  define ManDirectoryRoot	SystemManDirectory
+ # endif
+ # define HasPam			YES
++#if LinuxDistribution == LinuxDebian
+ /* un-comment this when it is un-broken */
+ /* # define JoystickSupport YES */
+ # if !defined(NothingOutsideProjectRoot) || !NothingOutsideProjectRoot
