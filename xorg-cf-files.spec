@@ -2,14 +2,13 @@ Summary:	X.org cf files
 Summary(pl.UTF-8):	Pliki cf z X.org
 Name:		xorg-cf-files
 Version:	1.0.6
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Development/Tools
 Source0:	http://xorg.freedesktop.org/releases/individual/util/%{name}-%{version}.tar.bz2
 # Source0-md5:	28649f34fa23143f1945aa2750e1472a
 Patch0:		%{name}-mandir.patch
-Patch1:		%{name}-lib64.patch
-Patch2:		%{name}-libx32.patch
+Patch1:		%{name}-libdir.patch
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -33,12 +32,7 @@ bibliotek kiedyś dostarczanych w monolitycznych wydaniach X.Org.
 %prep
 %setup -q -n %{name}-%{version}
 %patch0 -p1
-%if "%{_lib}" == "lib64"
 %patch1 -p1
-%endif
-%if "%{_lib}" == "libx32"
-%patch2 -p1
-%endif
 
 %build
 %{__aclocal}

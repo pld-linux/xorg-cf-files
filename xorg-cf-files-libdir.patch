@@ -1,0 +1,95 @@
+--- xorg-cf-files-1.0.6/Imake.cf.orig	2015-12-22 02:28:02.000000000 +0100
++++ xorg-cf-files-1.0.6/Imake.cf	2016-04-13 18:09:27.418272365 +0200
+@@ -1025,6 +1025,9 @@ XCOMM Keep cpp from replacing path eleme
+ #  undef __amd64__
+ #  undef __x86_64__
+ #  define AMD64Architecture
++#  if defined(_ILP32) | defined(__ILP32__)
++#    define AMD64ArchX32ABI
++#  endif
+ # endif
+ # if defined(amd64__) || defined (x86_64__)
+ #  undef amd64__
+--- xorg-cf-files-1.0.6/linux.cf.orig	2016-04-13 18:03:18.456082965 +0200
++++ xorg-cf-files-1.0.6/linux.cf	2016-04-13 18:13:41.561260974 +0200
+@@ -579,13 +579,21 @@ InstallNamedTargetNoClobber(install,file
+ #define MkdirHierCmd		mkdir -p
+ 
+ #ifndef HaveLib64
+-# if defined (AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture)
++# if (defined (AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture)) && !defined (AMD64ArchX32ABI)
+ #  define HaveLib64	YES
+ # else
+ #  define HaveLib64	NO
+ # endif
+ #endif
+ 
++#ifndef HaveLibX32
++# if defined (AMD64ArchX32ABI)
++#  define HaveLibX32	YES
++# else
++#  define HaveLibX32	NO
++# endif
++#endif
++
+ #if UseElfFormat
+ # ifndef DoLoadableServer
+ #  if defined(MipsArchitecture) || defined(SuperHArchitecture)
+@@ -645,16 +653,20 @@ InstallNamedTargetNoClobber(install,file
+ #  ifndef TermcapLibrary
+ #   if UseStaticTermcapLib
+ #    if LinuxUsesNcurses
+-#     if !HaveLib64
+-#      define TermcapLibrary	StaticLibrary(/usr/lib,ncurses)
+-#     else
++#     if HaveLib64
+ #      define TermcapLibrary	StaticLibrary(/usr/lib64,ncurses)
++#     elif HaveLibX32
++#      define TermcapLibrary	StaticLibrary(/usr/libx32,ncurses)
++#     else
++#      define TermcapLibrary	StaticLibrary(/usr/lib,ncurses)
+ #     endif
+ #    else
+-#     if !HaveLib64
+-#      define TermcapLibrary	StaticLibrary(/usr/lib/termcap,termcap)
+-#     else
++#     if HaveLib64
+ #      define TermcapLibrary	StaticLibrary(/usr/lib64/termcap,termcap)
++#     elif HaveLibX32
++#      define TermcapLibrary	StaticLibrary(/usr/libx32/termcap,termcap)
++#     else
++#      define TermcapLibrary	StaticLibrary(/usr/lib/termcap,termcap)
+ #     endif
+ #    endif
+ #   else
+@@ -1081,6 +1093,16 @@ InstallNamedTargetNoClobber(install,file
+ # ifndef TkLibDir
+ #  define TkLibDir		/usr/lib64
+ # endif
++#elif HaveLibX32
++# ifndef LibDirName
++#  define LibDirName		libx32
++# endif
++# ifndef SystemUsrLibDir
++#  define SystemUsrLibDir	/usr/libx32
++# endif
++# ifndef TkLibDir
++#  define TkLibDir		/usr/libx32
++# endif
+ #endif
+ 
+ #ifndef BuildDmx
+--- xorg-cf-files-1.0.6/X11.tmpl.orig	2015-12-22 02:28:02.000000000 +0100
++++ xorg-cf-files-1.0.6/X11.tmpl	2016-04-13 18:06:00.297687169 +0200
+@@ -1461,9 +1461,9 @@ FCHOWN_DEFINES = -DHAS_FCHOWN
+ #endif
+ #ifndef LibDir
+ # ifdef ProjectRoot
+-#  define LibDir Concat(ProjectRoot,/lib/X11)
++#  define LibDir Concat(ProjectRoot,/LibDirName/X11)
+ # else
+-#  define LibDir /usr/lib/X11
++#  define LibDir /usr/LibDirName/X11
+ # endif
+ #endif
+ #ifndef ModuleDir
