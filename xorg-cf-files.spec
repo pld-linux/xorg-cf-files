@@ -2,7 +2,7 @@ Summary:	X.org cf files
 Summary(pl.UTF-8):	Pliki cf z X.org
 Name:		xorg-cf-files
 Version:	1.0.7
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Development/Tools
 Source0:	https://xorg.freedesktop.org/releases/individual/util/%{name}-%{version}.tar.bz2
@@ -15,6 +15,9 @@ BuildRequires:	automake
 BuildRequires:	xorg-font-font-util >= 1.1
 BuildRequires:	xorg-util-util-macros >= 1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# no binaries in package
+%define		_enable_debug_packages	0
 
 %description
 The xorg-cf-files package contains the data files for the imake
