@@ -1,15 +1,15 @@
 Summary:	X.org cf files
 Summary(pl.UTF-8):	Pliki cf z X.org
 Name:		xorg-cf-files
-Version:	1.0.6
-Release:	2
+Version:	1.0.7
+Release:	1
 License:	MIT
 Group:		X11/Development/Tools
-Source0:	http://xorg.freedesktop.org/releases/individual/util/%{name}-%{version}.tar.bz2
-# Source0-md5:	28649f34fa23143f1945aa2750e1472a
+Source0:	https://xorg.freedesktop.org/releases/individual/util/%{name}-%{version}.tar.bz2
+# Source0-md5:	56548c4798e385aea26347ebc90fe410
 Patch0:		%{name}-mandir.patch
 Patch1:		%{name}-libdir.patch
-URL:		http://xorg.freedesktop.org/
+URL:		https://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	xorg-font-font-util >= 1.1
