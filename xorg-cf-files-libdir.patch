@@ -4,20 +4,20 @@
  #  undef __amd64__
  #  undef __x86_64__
  #  define AMD64Architecture
-+#  if defined(_ILP32) | defined(__ILP32__)
++#  if defined(_ILP32) || defined(__ILP32__)
 +#    define AMD64ArchX32ABI
 +#  endif
  # endif
  # if defined(amd64__) || defined (x86_64__)
  #  undef amd64__
---- xorg-cf-files-1.0.6/linux.cf.orig	2016-04-13 18:03:18.456082965 +0200
-+++ xorg-cf-files-1.0.6/linux.cf	2016-04-13 18:13:41.561260974 +0200
-@@ -579,13 +579,21 @@ InstallNamedTargetNoClobber(install,file
+--- xorg-cf-files-1.0.8/linux.cf.orig	2023-03-01 18:20:50.043361935 +0100
++++ xorg-cf-files-1.0.8/linux.cf	2023-03-01 18:21:50.653033584 +0100
+@@ -589,13 +589,21 @@ InstallNamedTargetNoClobber(install,file
  #define MkdirHierCmd		mkdir -p
  
  #ifndef HaveLib64
--# if defined (AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture)
-+# if (defined (AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture)) && !defined (AMD64ArchX32ABI)
+-# if defined (AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture) || defined (RV64Architecture)
++# if defined ((AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture) || defined (RV64Architecture)) && !defined(AMD64ArchX32ABI)
  #  define HaveLib64	YES
  # else
  #  define HaveLib64	NO
@@ -35,7 +35,7 @@
  #if UseElfFormat
  # ifndef DoLoadableServer
  #  if defined(MipsArchitecture) || defined(SuperHArchitecture)
-@@ -645,16 +653,20 @@ InstallNamedTargetNoClobber(install,file
+@@ -655,16 +663,20 @@ InstallNamedTargetNoClobber(install,file
  #  ifndef TermcapLibrary
  #   if UseStaticTermcapLib
  #    if LinuxUsesNcurses
@@ -62,7 +62,7 @@
  #     endif
  #    endif
  #   else
-@@ -1081,6 +1093,16 @@ InstallNamedTargetNoClobber(install,file
+@@ -1127,6 +1139,16 @@ InstallNamedTargetNoClobber(install,file
  # ifndef TkLibDir
  #  define TkLibDir		/usr/lib64
  # endif
