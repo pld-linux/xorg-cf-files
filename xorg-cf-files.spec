@@ -2,7 +2,7 @@ Summary:	X.org cf files
 Summary(pl.UTF-8):	Pliki cf z X.org
 Name:		xorg-cf-files
 Version:	1.0.8
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Development/Tools
 Source0:	https://xorg.freedesktop.org/releases/individual/util/%{name}-%{version}.tar.xz

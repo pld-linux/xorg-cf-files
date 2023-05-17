@@ -17,7 +17,7 @@
  
  #ifndef HaveLib64
 -# if defined (AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture) || defined (RV64Architecture)
-+# if defined ((AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture) || defined (RV64Architecture)) && !defined(AMD64ArchX32ABI)
++# if (defined (AMD64Architecture) || defined (s390xArchitecture) || defined (Ppc64Architecture) || defined (AArch64Architecture) || defined (RV64Architecture)) && !defined(AMD64ArchX32ABI)
  #  define HaveLib64	YES
  # else
  #  define HaveLib64	NO
